@@ -1,34 +1,20 @@
 import {
   createHTMLElement
 } from './utils/helpers';
+import Base from './base';
 
-export default class List {
+export default class List extends Base {
   constructor(parent, beforeElem) {
+    super();
     this._setDefaultConfig(parent, beforeElem);
     this._requestDraw();
   }
 
   _setDefaultConfig(parent, beforeElem) {
-    this._config = {
-      title: 'Enter title here',
-      frameDrawn: false,
-      parent,
-      beforeElem,
-      requestedAnimationFrame: false
-      // postDrawFn: []
-    };
-    this._components = {};
-  }
-
-  // afterDraw(cb) {
-  //   this._config.postDrawFn.push(cb);
-  // }
-
-  _requestDraw () {
-    if (!this._config.requestedAnimationFrame) {
-      this._draw();
-      this._config.requestedAnimationFrame = true;
-    }
+    super._setDefaultConfig();
+    this._config.title = 'Enter title here';
+    this._config.parent = parent;
+    this._config.beforeElem = beforeElem;
   }
 
   _drawFrame() {
@@ -91,19 +77,8 @@ export default class List {
     this._config.parent.insertBefore(listWraper.node, this._config.beforeElem);
   }
 
-  _drawItem() {
-    let item = createHTMLElement('div', {
-        class: 'item'
-      }),
-      itemText = createHTMLElement('div', {
-        class: 'item-text'
-      });
-  }
-
   _draw() {
-    if (!this._config.frameDrawn) {
-      this._drawFrame();
-    }
+    super._draw();
 
     // for (let i = 0, l = this._config.postDrawFn.length; i < l; i++) {
     //   this._config.postDrawFn[i]();

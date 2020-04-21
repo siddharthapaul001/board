@@ -4,7 +4,7 @@
   "description": "todo app",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && webpack-dev-server --host=0.0.0.0 --port=5000 --hot",
+    "start": "npm run build && webpack-dev-server --host=0.0.0.0 --hot",
     "build": "npm run build-prod && npm run build-dev",
     "build-prod": "webpack --mode production --output dist/main.min.js",
     "build-dev": "webpack --mode development",
