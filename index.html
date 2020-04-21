@@ -1,21 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Welcome Board</title>
-    <link rel="stylesheet" href="styles/main.css" />
-</head>
-<body>
-    <header>
-        <h3>Welcome Board</h3>
-    </header>
-    <div class="container">
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Welcome Board</title>
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+
+<body>
+  <header>
+    <h4>Welcome Board</h4>
+  </header>
+  <div id="app" class="container">
+    <!-- <div class="list-wraper">
+      <div class="list">
+        <div class="header">
+          <input type="text" class="inp-transparent inp-title" value="Stuff to try (this is a list)" />
+          <a class="btn-more" href="#!">
+            ···
+          </a>
+        </div>
+        <div class="items-container">
+          <div class="item">
+            <div class="item-text">
+              Hi this is Siddhartha
+            </div>
+          </div>
+        </div>
+        <div class="input-container">
+          <div class="txt-note-container">
+            <input class="inp-transparent txt-note" placeholder="＋ Add another card" type="text" />
+          </div>
+          <div class="btn-save-container">
+            <button class="btn btn-save">
+              <img src="assets/floppy_disk.png" width="20px" height="20px" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <div id="add-new-list" class="list-wraper btn-new-list-container">
+      <a href="#!" class="btn-add-list" id="btn-add-list">＋ Add another list</a>
     </div>
-    <!-- after deploy uncomment this -->
-    <!-- <script src="dist/main.min.js"></script> -->
-    <script src="main.js"></script>
+  </div>
+  <!-- after deploy uncomment this -->
+  <!-- <script src="dist/main.js"></script> -->
+  <script src="main.js"></script>
 </body>
+
 </html>
