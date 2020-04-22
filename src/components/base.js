@@ -9,6 +9,18 @@ export default class Base {
     this._components = {};
   }
 
+  configure (attrs) {
+    let config = this._config;
+    this._config = {
+      ...config,
+      ...attrs
+    };
+  }
+
+  getNode () {
+    return this._components['root-wraper'] && this._components['root-wraper'].node;
+  }
+
   _requestDraw() {
     if (!this._config.requestedAnimationFrame) {
       this._draw();
@@ -24,6 +36,9 @@ export default class Base {
     if (!this._config.frameDrawn) {
       this._drawFrame();
     }
+    // for (let i = 0, l = this._config.postDrawFn.length; i < l; i++) {
+    //   this._config.postDrawFn[i]();
+    // }
   }
 
   // afterDraw(cb) {

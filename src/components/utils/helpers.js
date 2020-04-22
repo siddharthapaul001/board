@@ -22,12 +22,27 @@ function createHTMLElement(elem, attrs, text) {
       node.setAttribute(attrNames[i], attrs[attrNames[i]]);
     }
   }
-  node.textContent = text;
+  if (text !== UNDEF) {
+    node.textContent = text;
+  }
   return el;
+}
+
+// ref: https://css-tricks.com/snippets/javascript/move-cursor-to-end-of-input/
+function moveCursorToEnd(el) {
+  if (typeof el.selectionStart == "number") {
+      el.selectionStart = el.selectionEnd = el.value.length;
+  } else if (typeof el.createTextRange != "undefined") {
+      el.focus();
+      let range = el.createTextRange();
+      range.collapse(false);
+      range.select();
+  }
 }
 
 export {
   doc,
   UNDEF,
-  createHTMLElement
+  createHTMLElement,
+  moveCursorToEnd
 }
