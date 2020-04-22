@@ -12,9 +12,9 @@ let listObjects = [];
 
 btnAddList.addEventListener('click', () => {
   rootNode.setAttribute('style', 'width:' + ((listObjects.length + 2) * 284) + 'px');
-  // let item = new ListItem();
-  // item.configure({ text: 'Hi this is Siddhartha' });
+  if (listObjects.length === 0) {
+    btnAddList.textContent = '＋ Add Another list';
+  }
   let list = new List(rootNode, beforeElem);
-  // list.addItem(item);
   listObjects.push(list);
 });

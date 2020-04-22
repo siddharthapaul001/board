@@ -64,6 +64,11 @@ export default class List extends Base {
         height: '20px'
       });
 
+    btnSave.node.addEventListener('click', () => {
+      this.saveNote(inpAddCard.node.value);
+      inpAddCard.node.value = '';
+    });
+
     listHeader.node.appendChild(inpTitle.node);
     listHeader.node.appendChild(btnMenu.node);
     list.node.appendChild(listHeader.node);
@@ -80,10 +85,7 @@ export default class List extends Base {
 
     inpAddCard.node.addEventListener('keyup', (e) => {
       if (e.keyCode === 13 && inpAddCard.node.value !== '') {
-        let item = new Item({
-          text: inpAddCard.node.value
-        });
-        this.addItem(item);
+        this.saveNote(inpAddCard.node.value);
         inpAddCard.node.value = '';
       }
     });
@@ -92,11 +94,20 @@ export default class List extends Base {
     this._components['root'] = list;
     this._components['inp-title'] = inpTitle;
     this._components['items-container'] = itemsContainer;
+    this._components['inp-add-card'] = inpAddCard;
+  }
+
+  saveNote(txtNote) {
+    let itemsContainer = this._components['items-container'], item = new Item({
+      text: txtNote
+    });
+    this.addItem(item);
+    itemsContainer.node.scrollTop = itemsContainer.node.scrollHeight;
   }
 
   addItem(listItem) {
     this._components['items-container'].node.appendChild(listItem.getNode());
-    this._listItems.push(listItem);
+    listItem.setIdx(this._listItems.push(listItem) - 1);
   }
 
   _draw() {

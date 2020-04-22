@@ -1,5 +1,6 @@
 import {
-  createHTMLElement
+  createHTMLElement,
+  moveCursorToEnd
 } from './utils/helpers';
 import Base from './base';
 
@@ -9,7 +10,6 @@ export default class ListItem extends Base {
     super();
     this._setDefaultConfig();
     this.configure(attrs);
-    console.log(attrs);
     this._requestDraw();
   }
 
@@ -44,17 +44,19 @@ export default class ListItem extends Base {
       createHTMLElement(itemText, {
         'contenteditable': 'true'
       });
-      itemText.node.focus();
+      moveCursorToEnd(itemText.node);
     });
 
     itemText.node.addEventListener('keydown', (e) => {
       if (e.keyCode === 13) {
         e.preventDefault();
-        if (itemText.node.value !== '') {
-          this._config.text = itemText.node.value;
+        if (itemText.node.textContent !== '') {
+          this._config.text = itemText.node.textContent;
           createHTMLElement(itemText, {
             'contenteditable': 'false'
           }, this._config.text);
+        } else {
+          this.dispose();
         }
       }
     });

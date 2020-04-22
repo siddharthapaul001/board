@@ -150,6 +150,7 @@ header h4 {
 }
 
 .item-text {
+  word-break: break-all;
   z-index: 20;
 }
 
