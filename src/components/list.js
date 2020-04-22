@@ -33,7 +33,7 @@ export default class List extends Base {
       }),
       inpTitle = createHTMLElement('input', {
         class: 'inp-transparent inp-title',
-        value: 'Enter title here...'
+        value: this._config.title
       }),
       btnMenu = createHTMLElement('a', {
         class: 'btn-more',

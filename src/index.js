@@ -5,7 +5,6 @@ import {
   restoreFromLocalStorage
 } from './components/utils/helpers';
 import List from './components/list';
-import ListItem from './components/list-item';
 
 const rootNode = doc.getElementById('app'),
   beforeElem = doc.getElementById('add-new-list'),
@@ -25,7 +24,7 @@ btnAddList.addEventListener('click', () => {
 });
 
 window.addEventListener('DOMContentLoaded', function() {
-  let initData = restoreFromLocalStorage(), list, item;
+  let initData = restoreFromLocalStorage(), list;
   setToEnv('ic-height', window.innerHeight * 0.7);
   if (initData) {
     for (let lIdx = 0, ll = initData.length; lIdx < ll; lIdx++) {
@@ -39,7 +38,6 @@ window.addEventListener('DOMContentLoaded', function() {
   rootNode.setAttribute('style', 'width:' + ((listObjects.length + 1) * 284) + 'px');
 });
 
-window.addEventListener('click', function () {
+window.addEventListener('beforeunload', function () {
   saveToLocalStorage();
-  this.console.log(window.localStorage.getItem('dumpedData'));
 })
