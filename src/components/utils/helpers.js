@@ -68,6 +68,10 @@ function restoreFromLocalStorage () {
   return dumpedData && JSON.parse(dumpedData);
 }
 
+function resetLocalStorage () {
+  window.localStorage.removeItem('dumpedData');
+}
+
 export {
   doc,
   UNDEF,
@@ -76,5 +80,6 @@ export {
   getFromEnv,
   setToEnv,
   saveToLocalStorage,
-  restoreFromLocalStorage
+  restoreFromLocalStorage,
+  resetLocalStorage
 }

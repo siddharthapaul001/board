@@ -2,15 +2,17 @@ import {
   doc,
   setToEnv,
   saveToLocalStorage,
-  restoreFromLocalStorage
+  restoreFromLocalStorage,
+  resetLocalStorage
 } from './components/utils/helpers';
 import List from './components/list';
 
 const rootNode = doc.getElementById('app'),
   beforeElem = doc.getElementById('add-new-list'),
-  btnAddList = doc.getElementById('btn-add-list');
+  btnAddList = doc.getElementById('btn-add-list'),
+  btnReset = doc.getElementById('btn-reset');
 
-let listObjects = [];
+let listObjects = [], bypassStorage = false;
 
 setToEnv('lists', listObjects);
 
@@ -39,5 +41,13 @@ window.addEventListener('DOMContentLoaded', function() {
 });
 
 window.addEventListener('beforeunload', function () {
-  saveToLocalStorage();
-})
+  if (!bypassStorage) {
+    saveToLocalStorage();
+  }
+});
+
+btnReset.addEventListener('click', function() {
+  bypassStorage = true;
+  resetLocalStorage();
+  window.location.reload();
+});

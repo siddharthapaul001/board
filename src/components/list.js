@@ -51,7 +51,7 @@ export default class List extends Base {
       }),
       inpAddCard = createHTMLElement('input', {
         class: 'inp-transparent txt-note',
-        placeholder: '＋ Add card',
+        placeholder: '＋ Add card (Enter text here)',
         type: 'text'
       }),
       saveBtnContainer = createHTMLElement('div', {
@@ -84,7 +84,7 @@ export default class List extends Base {
     });
 
     btnSave.node.addEventListener('click', () => {
-      this.saveNote(inpAddCard.node.value);
+      inpAddCard.node.value !== '' && this.saveNote(inpAddCard.node.value);
       inpAddCard.node.value = '';
     });
 

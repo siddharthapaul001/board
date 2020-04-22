@@ -225,3 +225,13 @@ header h4 {
   font-weight: bold;
   width: 210px;
 }
+
+.btn-reset {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  color: #fafafa;
+  background-color: #ff2d55;
+  padding: 10px;
+  border-radius: 5px;
+}
