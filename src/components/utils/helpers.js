@@ -1,5 +1,13 @@
 const doc = document;
-let UNDEF;
+let UNDEF, _env = {};
+
+function setToEnv (name, value) {
+  _env[name] = value;
+}
+
+function getFromEnv (name) {
+  return _env[name];
+}
 
 function createHTMLElement(elem, attrs, text) {
   let node, attrNames, el = elem;
@@ -28,18 +36,6 @@ function createHTMLElement(elem, attrs, text) {
   return el;
 }
 
-// ref: https://css-tricks.com/snippets/javascript/move-cursor-to-end-of-input/
-function _moveCursorToEnd(el) {
-  if (typeof el.selectionStart == "number") {
-      el.selectionStart = el.selectionEnd = el.value.length;
-  } else if (typeof el.createTextRange != "undefined") {
-      el.focus();
-      let range = el.createTextRange();
-      range.collapse(false);
-      range.select();
-  }
-}
-
 // ref: https://stackoverflow.com/questions/1125292/how-to-move-cursor-to-end-of-contenteditable-entity/3866442#3866442
 function moveCursorToEnd(contentEditableElement)
 {
@@ -66,5 +62,7 @@ export {
   doc,
   UNDEF,
   createHTMLElement,
-  moveCursorToEnd
+  moveCursorToEnd,
+  getFromEnv,
+  setToEnv
 }

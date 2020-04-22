@@ -17,12 +17,28 @@ export default class Base {
     };
   }
 
+  getConfig (name) {
+    return this._config[name];
+  }
+
   getNode () {
     return this._components['root-wraper'] && this._components['root-wraper'].node;
   }
 
+  getIdx () {
+    return this._config.idx;
+  }
+
   setIdx(idx) {
     this._config.idx = idx;
+  }
+
+  setParentComponent (component) {
+    this._parentComponent = component;
+  }
+
+  getParentComponent () {
+    return this._parentComponent;
   }
 
   _requestDraw() {

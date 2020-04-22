@@ -1,5 +1,6 @@
 import {
-  doc
+  doc,
+  setToEnv
 } from './components/utils/helpers';
 import List from './components/list';
 import ListItem from './components/list-item';
@@ -10,11 +11,17 @@ const rootNode = doc.getElementById('app'),
 
 let listObjects = [];
 
+setToEnv('lists', listObjects);
+
 btnAddList.addEventListener('click', () => {
   rootNode.setAttribute('style', 'width:' + ((listObjects.length + 2) * 284) + 'px');
   if (listObjects.length === 0) {
     btnAddList.textContent = '＋ Add Another list';
   }
   let list = new List(rootNode, beforeElem);
-  listObjects.push(list);
+  list.setIdx(listObjects.push(list) - 1);
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+  setToEnv('ic-height', window.innerHeight * 0.7);
 });

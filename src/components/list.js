@@ -1,5 +1,6 @@
 import {
-  createHTMLElement
+  createHTMLElement,
+  getFromEnv
 } from './utils/helpers';
 import Base from './base';
 import Item from './list-item';
@@ -39,7 +40,8 @@ export default class List extends Base {
         href: '#!'
       }, '···'),
       itemsContainer = createHTMLElement('div', {
-        class: 'items-container'
+        class: 'items-container',
+        style: 'max-height:' + getFromEnv('ic-height') + 'px'
       }),
       inpContainer = createHTMLElement('div', {
         class: 'input-container'
@@ -63,6 +65,19 @@ export default class List extends Base {
         width: '20px',
         height: '20px'
       });
+
+    listWraper.node.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = "move";
+    })
+    listWraper.node.addEventListener('drop', (e) => {
+      let currentIdx = e.dataTransfer.getData('currentIdx'),
+        currentParentIdx = e.dataTransfer.getData('currentParentIdx'),
+        item = getFromEnv('lists')[currentParentIdx].getItem(currentIdx),
+        txt = item.getConfig('text');
+      this.saveNote(txt);
+      item.dispose();
+    });
 
     btnSave.node.addEventListener('click', () => {
       this.saveNote(inpAddCard.node.value);
@@ -98,9 +113,10 @@ export default class List extends Base {
   }
 
   saveNote(txtNote) {
-    let itemsContainer = this._components['items-container'], item = new Item({
-      text: txtNote
-    });
+    let itemsContainer = this._components['items-container'],
+      item = new Item({
+        text: txtNote
+      });
     this.addItem(item);
     itemsContainer.node.scrollTop = itemsContainer.node.scrollHeight;
   }
@@ -108,6 +124,11 @@ export default class List extends Base {
   addItem(listItem) {
     this._components['items-container'].node.appendChild(listItem.getNode());
     listItem.setIdx(this._listItems.push(listItem) - 1);
+    listItem.setParentComponent(this);
+  }
+
+  getItem (idx) {
+    return this._listItems[idx];
   }
 
   _draw() {

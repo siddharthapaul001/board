@@ -40,6 +40,11 @@ export default class ListItem extends Base {
         height: '10px'
       });
 
+    itemWraper.node.addEventListener('dragstart', (ev) => {
+      ev.dataTransfer.setData('currentIdx', this.getIdx());
+      ev.dataTransfer.setData('currentParentIdx', this.getParentComponent().getIdx());
+    });
+
     btnEdit.node.addEventListener('click', function () {
       createHTMLElement(itemText, {
         'contenteditable': 'true'

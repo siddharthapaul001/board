@@ -85,7 +85,7 @@ a {
 
 header h4 {
   color: #fafafa;
-  padding-left: 20px;
+  margin: 20px 0 5px 20px;
 }
 
 .container {
@@ -127,7 +127,6 @@ header h4 {
 .items-container {
   padding: 7px 4px;
   overflow: auto;
-  max-height: 70vh;
 }
 
 .item {
