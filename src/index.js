@@ -1,9 +1,10 @@
 import {
   doc,
-  setToEnv
+  setToEnv,
+  saveToLocalStorage,
+  restoreFromLocalStorage
 } from './components/utils/helpers';
 import List from './components/list';
-import ListItem from './components/list-item';
 
 const rootNode = doc.getElementById('app'),
   beforeElem = doc.getElementById('add-new-list'),
@@ -22,6 +23,21 @@ btnAddList.addEventListener('click', () => {
   list.setIdx(listObjects.push(list) - 1);
 });
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', function() {
+  let initData = restoreFromLocalStorage(), list;
   setToEnv('ic-height', window.innerHeight * 0.7);
+  if (initData) {
+    for (let lIdx = 0, ll = initData.length; lIdx < ll; lIdx++) {
+      list = new List(rootNode, beforeElem, initData[lIdx].title);
+      for (let i = 0, l = initData[lIdx].items.length; i < l; i++) {
+        list.saveNote(initData[lIdx].items[i].text);
+      }
+      list.setIdx(listObjects.push(list) - 1);
+    }
+  }
+  rootNode.setAttribute('style', 'width:' + ((listObjects.length + 1) * 284) + 'px');
 });
+
+window.addEventListener('beforeunload', function () {
+  saveToLocalStorage();
+})

@@ -58,11 +58,25 @@ function moveCursorToEnd(contentEditableElement)
     }
 }
 
+function saveToLocalStorage () {
+  let lists = getFromEnv('lists');
+  if (lists) {
+    window.localStorage.setItem('dumpedData', JSON.stringify(lists.filter(list => !list._disposed).map(list => list.serialize())));
+  }
+}
+
+function restoreFromLocalStorage () {
+  let dumpedData = window.localStorage.getItem('dumpedData');
+  return dumpedData && JSON.parse(dumpedData);
+}
+
 export {
   doc,
   UNDEF,
   createHTMLElement,
   moveCursorToEnd,
   getFromEnv,
-  setToEnv
+  setToEnv,
+  saveToLocalStorage,
+  restoreFromLocalStorage
 }
