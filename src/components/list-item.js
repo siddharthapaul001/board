@@ -79,4 +79,10 @@ export default class ListItem extends Base {
   _draw() {
     super._draw();
   }
+
+  serialize () {
+    return {
+      text: this._config.text
+    };
+  }
 }

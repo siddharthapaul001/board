@@ -121,7 +121,17 @@ header h4 {
 
 .list .btn-more {
   color: #444;
-  float: right;
+  padding: 3px;
+  position: absolute;
+  right: 10px;
+}
+
+.list .btn-more::after {
+  content: '···';
+}
+
+.list .btn-more:hover::after {
+  content: '✕'
 }
 
 .items-container {

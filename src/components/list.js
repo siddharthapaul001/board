@@ -6,15 +6,15 @@ import Base from './base';
 import Item from './list-item';
 
 export default class List extends Base {
-  constructor(parent, beforeElem) {
+  constructor(parent, beforeElem, title = 'Enter title here') {
     super();
     this._setDefaultConfig(parent, beforeElem);
+    this._config.title = title;
     this._requestDraw();
   }
 
   _setDefaultConfig(parent, beforeElem) {
     super._setDefaultConfig();
-    this._config.title = 'Enter title here';
     this._config.parent = parent;
     this._config.beforeElem = beforeElem;
     this._listItems = [];
@@ -38,7 +38,7 @@ export default class List extends Base {
       btnMenu = createHTMLElement('a', {
         class: 'btn-more',
         href: '#!'
-      }, '···'),
+      }),
       itemsContainer = createHTMLElement('div', {
         class: 'items-container',
         style: 'max-height:' + getFromEnv('ic-height') + 'px'
@@ -51,7 +51,7 @@ export default class List extends Base {
       }),
       inpAddCard = createHTMLElement('input', {
         class: 'inp-transparent txt-note',
-        placeholder: '＋ Add another card',
+        placeholder: '＋ Add card',
         type: 'text'
       }),
       saveBtnContainer = createHTMLElement('div', {
@@ -79,9 +79,17 @@ export default class List extends Base {
       item.dispose();
     });
 
+    btnMenu.node.addEventListener('click', () => {
+      this.dispose();
+    });
+
     btnSave.node.addEventListener('click', () => {
       this.saveNote(inpAddCard.node.value);
       inpAddCard.node.value = '';
+    });
+
+    inpTitle.node.addEventListener('keyup', () => {
+      this._config.title = inpTitle.node.value;
     });
 
     listHeader.node.appendChild(inpTitle.node);
@@ -133,5 +141,12 @@ export default class List extends Base {
 
   _draw() {
     super._draw();
+  }
+
+  serialize () {
+    return {
+      title: this._config.title,
+      items: this._listItems.filter(item => !item._disposed).map(item => item.serialize())
+    };
   }
 }
