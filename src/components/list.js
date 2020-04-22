@@ -134,4 +134,11 @@ export default class List extends Base {
   _draw() {
     super._draw();
   }
+
+  serialize () {
+    return {
+      title: this._config.title,
+      items: this._listItems.filter(item => !item._disposed).map(item => item.serialize())
+    };
+  }
 }
