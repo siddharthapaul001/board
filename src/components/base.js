@@ -59,6 +59,7 @@ export default class Base {
     // for (let i = 0, l = this._config.postDrawFn.length; i < l; i++) {
     //   this._config.postDrawFn[i]();
     // }
+    this._config.requestedAnimationFrame = false;
   }
 
   dispose () {

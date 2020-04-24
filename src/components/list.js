@@ -139,10 +139,6 @@ export default class List extends Base {
     return this._listItems[idx];
   }
 
-  _draw() {
-    super._draw();
-  }
-
   serialize () {
     return {
       title: this._config.title,
