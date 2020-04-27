@@ -140,6 +140,11 @@ export default class List extends Base {
     return this._listItems[idx];
   }
 
+  _draw () {
+    super._draw();
+    this._components['inp-title'].node.value = this._config.title;
+  }
+
   serialize () {
     return {
       title: this._config.title,

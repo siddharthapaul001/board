@@ -67,8 +67,12 @@ export default class ListItem extends Base {
     itemWraper.node.appendChild(item.node);
     this._components['root-wraper'] = itemWraper;
     this._components['root'] = item;
-    this._components['inp-edit'] = itemText;
     this._components['item-text'] = itemText;
+  }
+
+  _draw() {
+    super._draw();
+    this._components['item-text'].node.textContent = this._config.text;
   }
 
   serialize () {

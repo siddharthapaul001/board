@@ -1,6 +1,6 @@
 export default class Base {
 
-  _setDefaultConfig () {
+  _setDefaultConfig() {
     this._config = {
       frameDrawn: false,
       requestedAnimationFrame: false
@@ -9,7 +9,7 @@ export default class Base {
     this._components = {};
   }
 
-  configure (attrs) {
+  configure(attrs) {
     let config = this._config;
     this._config = {
       ...config,
@@ -17,15 +17,15 @@ export default class Base {
     };
   }
 
-  getConfig (name) {
+  getConfig(name) {
     return this._config[name];
   }
 
-  getNode () {
+  getNode() {
     return this._components['root-wraper'] && this._components['root-wraper'].node;
   }
 
-  getIdx () {
+  getIdx() {
     return this._config.idx;
   }
 
@@ -33,26 +33,28 @@ export default class Base {
     this._config.idx = idx;
   }
 
-  setParentComponent (component) {
+  setParentComponent(component) {
     this._parentComponent = component;
   }
 
-  getParentComponent () {
+  getParentComponent() {
     return this._parentComponent;
   }
 
   _requestDraw() {
     if (!this._config.requestedAnimationFrame) {
-      this._draw();
-      this._config.requestedAnimationFrame = true;
+      requestAnimationFrame(() => {
+        this._draw();
+        this._config.requestedAnimationFrame = true;
+      });
     }
   }
 
-  _drawFrame () {
+  _drawFrame() {
     // code to initate the constant frame
   }
 
-  _draw () {
+  _draw() {
     if (!this._config.frameDrawn) {
       this._drawFrame();
     }
@@ -62,7 +64,11 @@ export default class Base {
     this._config.requestedAnimationFrame = false;
   }
 
-  dispose () {
+  render() {
+    this._requestDraw();
+  }
+
+  dispose() {
     if (this._components['root-wraper']) {
       this._components['root-wraper'].node.parentNode.removeChild(this._components['root-wraper'].node);
       this._disposed = true;
