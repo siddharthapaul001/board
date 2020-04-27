@@ -45,8 +45,8 @@ export default class Base {
     if (!this._config.requestedAnimationFrame) {
       requestAnimationFrame(() => {
         this._draw();
-        this._config.requestedAnimationFrame = true;
       });
+      this._config.requestedAnimationFrame = true;
     }
   }
 
