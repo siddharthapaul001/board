@@ -58,9 +58,6 @@ export default class Base {
     if (!this._config.frameDrawn) {
       this._drawFrame();
     }
-    // for (let i = 0, l = this._config.postDrawFn.length; i < l; i++) {
-    //   this._config.postDrawFn[i]();
-    // }
     this._config.requestedAnimationFrame = false;
   }
 
@@ -86,8 +83,4 @@ export default class Base {
       this._config = {};
     }
   }
-
-  // afterDraw(cb) {
-  //   this._config.postDrawFn.push(cb);
-  // }
 };
