@@ -3,8 +3,8 @@ export default class Base {
   _setDefaultConfig() {
     this._config = {
       frameDrawn: false,
-      requestedAnimationFrame: false
-      // postDrawFn: []
+      requestedAnimationFrame: false,
+      postDrawFn: []
     };
     this._components = {};
   }
@@ -64,9 +64,19 @@ export default class Base {
     this._config.requestedAnimationFrame = false;
   }
 
-  render() {
-    this._requestDraw();
+  onDrawComplete (cb) {
+    this._config.postDrawFn.push(cb);
   }
+
+  _fireDrawComplete () {
+    for (let i = 0, l = this._config.postDrawFn.length; i < l; i++) {
+      this._config.postDrawFn[i]();
+    }
+  }
+
+  // render() {
+  //   this._requestDraw();
+  // }
 
   dispose() {
     if (this._components['root-wraper']) {

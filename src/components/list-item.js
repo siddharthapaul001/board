@@ -73,6 +73,7 @@ export default class ListItem extends Base {
   _draw() {
     super._draw();
     this._components['item-text'].node.textContent = this._config.text;
+    this._fireDrawComplete();
   }
 
   serialize () {

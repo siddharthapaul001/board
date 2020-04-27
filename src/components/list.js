@@ -122,12 +122,13 @@ export default class List extends Base {
   }
 
   saveNote(txtNote) {
-    let itemsContainer = this._components['items-container'],
-      item = new Item({
+    let item = new Item({
         text: txtNote
       });
-    this.addItem(item);
-    itemsContainer.node.scrollTop = itemsContainer.node.scrollHeight;
+    item.onDrawComplete(() => {
+      this.addItem(item);
+      this._components['items-container'].node.scrollTop = this._components['items-container'].node.scrollHeight;
+    });
   }
 
   addItem(listItem) {
@@ -143,6 +144,7 @@ export default class List extends Base {
   _draw () {
     super._draw();
     this._components['inp-title'].node.value = this._config.title;
+    this._fireDrawComplete();
   }
 
   serialize () {
