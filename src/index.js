@@ -30,7 +30,7 @@ window.addEventListener('DOMContentLoaded', function() {
   setToEnv('ic-height', window.innerHeight * 0.7);
   if (initData) {
     for (let lIdx = 0, ll = initData.length; lIdx < ll; lIdx++) {
-      list = new List(rootNode, beforeElem, initData[lIdx].title);
+      list = new List(rootNode, beforeElem, { title: initData[lIdx].title });
       for (let i = 0, l = initData[lIdx].items.length; i < l; i++) {
         list.saveNote(initData[lIdx].items[i].text);
       }

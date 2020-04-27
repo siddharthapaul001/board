@@ -9,7 +9,7 @@ export default class ListItem extends Base {
   constructor(attrs) {
     super();
     this._setDefaultConfig();
-    this.configure(attrs);
+    attrs && this.configure(attrs);
     this._requestDraw();
   }
 

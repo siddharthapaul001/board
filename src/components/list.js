@@ -6,17 +6,18 @@ import Base from './base';
 import Item from './list-item';
 
 export default class List extends Base {
-  constructor(parent, beforeElem, title = 'Enter title here') {
+  constructor(parent, beforeElem, attrs) {
     super();
-    this._setDefaultConfig(parent, beforeElem, title);
+    this._setDefaultConfig(parent, beforeElem);
+    attrs && this.configure(attrs);
     this._requestDraw();
   }
 
-  _setDefaultConfig(parent, beforeElem, title) {
+  _setDefaultConfig(parent, beforeElem) {
     super._setDefaultConfig();
     this._config.parent = parent;
     this._config.beforeElem = beforeElem;
-    this._config.title = title;
+    this._config.title = 'Enter title here';
     this._listItems = [];
   }
 
