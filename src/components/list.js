@@ -8,15 +8,15 @@ import Item from './list-item';
 export default class List extends Base {
   constructor(parent, beforeElem, title = 'Enter title here') {
     super();
-    this._setDefaultConfig(parent, beforeElem);
-    this._config.title = title;
+    this._setDefaultConfig(parent, beforeElem, title);
     this._requestDraw();
   }
 
-  _setDefaultConfig(parent, beforeElem) {
+  _setDefaultConfig(parent, beforeElem, title) {
     super._setDefaultConfig();
     this._config.parent = parent;
     this._config.beforeElem = beforeElem;
+    this._config.title = title;
     this._listItems = [];
   }
 
@@ -92,6 +92,13 @@ export default class List extends Base {
       this._config.title = inpTitle.node.value;
     });
 
+    inpAddCard.node.addEventListener('keyup', (e) => {
+      if (e.keyCode === 13 && inpAddCard.node.value !== '') {
+        this.saveNote(inpAddCard.node.value);
+        inpAddCard.node.value = '';
+      }
+    });
+
     listHeader.node.appendChild(inpTitle.node);
     listHeader.node.appendChild(btnMenu.node);
     list.node.appendChild(listHeader.node);
@@ -105,13 +112,6 @@ export default class List extends Base {
     listWraper.node.appendChild(list.node);
 
     this._config.parent.insertBefore(listWraper.node, this._config.beforeElem);
-
-    inpAddCard.node.addEventListener('keyup', (e) => {
-      if (e.keyCode === 13 && inpAddCard.node.value !== '') {
-        this.saveNote(inpAddCard.node.value);
-        inpAddCard.node.value = '';
-      }
-    });
 
     this._components['root-wraper'] = listWraper;
     this._components['root'] = list;

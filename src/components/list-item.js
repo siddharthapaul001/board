@@ -13,11 +13,6 @@ export default class ListItem extends Base {
     this._requestDraw();
   }
 
-  _setDefaultConfig() {
-    super._setDefaultConfig();
-    // this._config.text = '';
-  }
-
   _drawFrame() {
     let itemWraper = createHTMLElement('div', {
         class: 'item-wraper',
