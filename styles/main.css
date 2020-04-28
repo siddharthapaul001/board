@@ -127,11 +127,7 @@ header h4 {
 }
 
 .list .btn-more::after {
-  content: '···';
-}
-
-.list .btn-more:hover::after {
-  content: '✕'
+  content: '✕';
 }
 
 .items-container {

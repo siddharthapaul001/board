@@ -17,7 +17,7 @@ export default class List extends Base {
     super._setDefaultConfig();
     this._config.parent = parent;
     this._config.beforeElem = beforeElem;
-    this._config.title = 'Enter title here';
+    this._config.title = '';
     this._listItems = [];
   }
 
@@ -34,7 +34,8 @@ export default class List extends Base {
       }),
       inpTitle = createHTMLElement('input', {
         class: 'inp-transparent inp-title',
-        value: this._config.title
+        value: this._config.title,
+        placeholder: 'Enter title here'
       }),
       btnMenu = createHTMLElement('a', {
         class: 'btn-more',

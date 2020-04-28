@@ -45,6 +45,7 @@ export default class ListItem extends Base {
         'contenteditable': 'true'
       });
       moveCursorToEnd(itemText.node);
+      this.style.display = 'none';
     });
 
     itemText.node.addEventListener('keydown', (e) => {
@@ -55,6 +56,7 @@ export default class ListItem extends Base {
           createHTMLElement(itemText, {
             'contenteditable': 'false'
           }, this._config.text);
+          btnEdit.node.style.display = 'inline-block';
         } else {
           this.dispose();
         }
